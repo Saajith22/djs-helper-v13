@@ -11,5 +11,10 @@ let thing = create_button({ style: 'green', label: 'CHICKEN', id: 'SED' }); // c
 
 console.log(thing);
 ```
-The Above Log Returns this Button =>
+<div> 
+<h3> The Above Log Returns this Button: <h3>
 <img src="https://media.discordapp.net/attachments/803265379484565564/864160182644899841/unknown.png">
+<div>
+
+
+**Note**: This project is free of use, any actions of copying this project is not allowed!!
