@@ -16,12 +16,12 @@ const {
  */
 
 const button_pagination = async (client, message, embeds) => {
-    const button = new MessageButton()
+    let button = new MessageButton()
         .setCustomId(`-1${message.author.id}`)
         .setLabel('⏪')
         .setStyle('SUCCESS');
 
-    const button2 = new MessageButton()
+    let button2 = new MessageButton()
         .setCustomId(`-2${message.author.id}`)
         .setLabel('⏩')
         .setStyle('SUCCESS');
@@ -45,38 +45,34 @@ const button_pagination = async (client, message, embeds) => {
         if (!interaction.isButton()) return;
         if (interaction.user.bot) return;
 
-        const filter = i => i.user.id === interaction.user.id;
+        if(interaction.user.id !== message.author.id) return interaction.channel.send({ content: "You can not use the button!", ephermal: true })
 
-        const collector = interaction.channel.createMessageComponentCollector({
-            filter,
-            time: 15000
-        });
+        if (interaction.customId == `-1${message.author.id}`) {
 
-        collector.on('collect', async i => {
-            if (i.customId == `-1${message.author.id}`) {
+            index = index > 0 ? --index : embeds.length - 1;
 
-                index = index > 0 ? --index : embeds.length - 1;
+            await interaction.update({
+                embeds: [embeds[index]]
+            });
 
-                await i.update({
-                    embeds: [embeds[index]]
-                });
+        } else if (interaction.customId == `-2${message.author.id}`) {
 
-            } else if (i.customId == `-2${message.author.id}`) {
+            index = index + 1 < embeds.length ? ++index : 0;
 
+            await interaction.update({
+                embeds: [embeds[index]]
+            });
+        }
 
-                index = index + 1 < embeds.length ? ++index : 0;
+        setTimeout(async () => {
 
-                await i.update({
-                    embeds: [embeds[index]]
-                });
-            }
-        });
-
-        collector.on('end', collected => {
             button.setDisabled(true)
             button2.setDisabled(true)
-        });
 
+            return await interaction.editReply({
+                components: [buttons]
+            });
+        }, 15000)
     })
 
     return msg;

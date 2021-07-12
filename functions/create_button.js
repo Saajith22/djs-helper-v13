@@ -25,26 +25,27 @@ const create_button = (options) => {
         id
     } = options;
     if (!style || !label) throw new Error(`The options were not provided! ${chalk.red.bold('Error')}`);
-    if (url && id) throw new Error(`You can not have both the url and id at the same time!! ${chalk.red.bold('Error')}`);
-
+    if(url && id) return console.error(`Both the url and id can not be specified at the same time! ${chalk.red.bold('Error')}`)
     let button;
 
-    let styles = ["green", "red", "url", "big", "small"];
-    if (!styles.includes(style.toLowerCase())) throw new Error(`Invalid style was provided! Please use one of: (green, red, url, big, small)! ${chalk.red.bold('Error')}`)
+    let styles = ["green", "red", "url", "normal", "grey"];
+    if (!styles.includes(style.toLowerCase())) throw new Error(`Invalid style was provided! Please use one of: (green, red, url, big, small)! ${chalk.red.bold('Error')}`);
 
+    if (style.toLowerCase() == 'url' && !url) throw new Error(`An url must be provided if the style is set to url! ${chalk.red.bold('Error')}`)
+    if(!url.startsWith('https') || !url.startsWith('http')) return console.error(`An invalid URL was provided! ${chalk.red.bold('Error')}`);
     let stole = styleChanger(style.toLowerCase());
 
-    if (id) {
-        button = new MessageButton()
-            .setCustomId(id)
-            .setLabel(label)
-            .setStyle(stole)
-    } else {
+    if (url) {
         if (!stole == "LINK") throw new Error(`The style must be url if you are making a url-redirect button! ${chalk.red.bold('Error')}`)
         button = new MessageButton()
-            .setCustomId(id)
             .setLabel(label)
             .setStyle(stole)
+            .setURL(url)
+    } else {
+        button = new MessageButton()
+        .setCustomId(id)
+        .setLabel(label)
+        .setStyle(stole)
     }
 
     return button;

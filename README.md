@@ -7,19 +7,9 @@ djs-helper-v13 is a helper for discord.js v13. It has many useful things, that m
 ```js
 const { create_button } = require('djs-helper-v13'); // requring the file!
 
-let thing = create_button({ style: 'green', label: 'Hello', id: 'SED' }); // creating the button (with options that we want!)
+let thing = create_button({ style: 'green', label: 'CHICKEN', id: 'SED' }); // creating the button (with options that we want!)
 
-console.log(thing); // returns =>
-/*
-MessageButton {
-  type: 'BUTTON',
-  label: 'Hello',
-  customId: 'SED',
-  style: 'SUCCESS',
-  emoji: null,
-  url: null,
-  disabled: false
-}
-*/
-
+console.log(thing);
 ```
+The Above Log Returns this Button =>
+<img src="https://media.discordapp.net/attachments/803265379484565564/864160182644899841/unknown.png">
