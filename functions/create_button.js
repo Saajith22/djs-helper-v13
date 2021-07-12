@@ -68,11 +68,11 @@ function styleChanger(style) {
             style = "LINK"
             break;
 
-        case ('big'):
+        case ('normal'):
             style = "PRIMARY"
             break;
 
-        case ('small'):
+        case ('grey'):
             style = "SECONDARY"
             break;
     }
