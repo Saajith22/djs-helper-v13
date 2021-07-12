@@ -15,7 +15,7 @@ const {
  * @returns Button Pagination
  */
 
-const button_pagination = async (message, embeds) => {
+const button_pagination = async (client, message, embeds) => {
     const button = new MessageButton()
         .setCustomId(`-1${message.author.id}`)
         .setLabel('⏪')
