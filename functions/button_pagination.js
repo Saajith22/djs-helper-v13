@@ -1,7 +1,8 @@
 const {
     MessageButton,
     Client,
-    Message
+    Message,
+    Interaction
 } = require('discord.js');
 
 /*BUTTON PAGINATION*/
@@ -37,30 +38,45 @@ const button_pagination = async (message, embeds) => {
         components: [buttons]
     });
 
+    /**
+     * @param {Interaction} interaction
+     */
     client.on('interactionCreate', async (interaction) => {
         if (!interaction.isButton()) return;
         if (interaction.user.bot) return;
 
-        if (interaction.user.id !== message.author.id) return await interaction.defer();
+        const filter = i => i.user.id === interaction.user.id;
+
+        const collector = interaction.channel.createMessageComponentCollector({
+            filter,
+            time: 15000
+        });
+
+        collector.on('collect', async i => {
+            if (i.customId == `-1${message.author.id}`) {
+
+                index = index > 0 ? --index : embeds.length - 1;
+
+                await i.update({
+                    embeds: [embeds[index]]
+                });
+
+            } else if (i.customId == `-2${message.author.id}`) {
 
 
-        if (interaction.customId == `-1${message.author.id}`) {
+                index = index + 1 < embeds.length ? ++index : 0;
 
-            index = index > 0 ? --index : embeds.length - 1;
+                await i.update({
+                    embeds: [embeds[index]]
+                });
+            }
+        });
 
-            await interaction.update({
-                embeds: [embeds[index]]
-            });
+        collector.on('end', collected => {
+            button.setDisabled(true)
+            button2.setDisabled(true)
+        });
 
-        } else if (interaction.customId == `-2${message.author.id}`) {
-
-
-            index = index + 1 < embeds.length ? ++index : 0;
-
-            await interaction.update({
-                embeds: [embeds[index]]
-            });
-        }
     })
 
     return msg;
