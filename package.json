@@ -1,6 +1,6 @@
 {
   "name": "djs-helper-v13",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "",
   "main": "index.js",
   "preferGlobal": true,
@@ -15,6 +15,7 @@
   "keywords": [
     "discord.js",
     "js",
+    "interactions",
     "v13"
   ],
   "license": "ISC",

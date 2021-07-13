@@ -27,10 +27,12 @@ First install [Node.js](http://nodejs.org/), then:
 $ npm install djs-helper-v13
 ```
 
-## 🛠 Usages (Click on it for more info on how to use it)
+## 🛠 Usages
 
--   [create_button](https://www.npmjs.com/package/djs-helper-v13/create_button) - Creating MessageButton easily!
--   [button_pagination](https://www.npmjs.com/package/djs-helper-v13/button_pagination) - the newest way of storing data in mongodb with cache
+**Tip**: Click the them to see more information!
+
+-   [create_button](https://www.npmjs.com/package/djs-helper-v13/#create_button) - Creating MessageButton easily!
+-   [button_pagination](https://www.npmjs.com/package/djs-helper-v13/#button_pagination) - Creating Embed Pagination with Buttons easily!
 ## ✈ Importing
 
 ```javascript
@@ -41,10 +43,9 @@ const helper = require("djs-helper-v13");
 import helper from "djs-helper-v13";
 ```
 
-## 🔧 Usages
+## 🔧 Examples for Usages
 
-
-## create_button
+### create_button
 
 #### Example :
 
@@ -64,7 +65,7 @@ console.log(thing);
 ![preview](https://media.discordapp.net/attachments/803265379484565564/864160182644899841/unknown.png)
 
 
-## button_pagination
+### button_pagination
 
 #### Example :
 
@@ -93,10 +94,10 @@ const listOfEmbeds = [
    embed2
 ]
 
-// Using the pagination in an async event!
+// Using the pagination, by handling its promise!
 // Passing, the Client, Message and the array of embeds =>
 
-(async() => await button_pagination(client, message, listOfEmbeds))
+button_pagination(client, message, listOfEmbeds).then(e => null);
 
 // Now you have the button pagination
 
