@@ -1,6 +1,6 @@
 # 💻 djs-helper-v13
 
-djs-helper-v13 is a helper for discord.js v13. It has many useful things, that enhance v13 and makes v13 easier!
+djs-helper-v13 is a helper for discord.js v13. It has many useful things, that enhances v13 and makes v13 easier!
 
 <div align="center">
   <p>
@@ -14,7 +14,7 @@ djs-helper-v13 is a helper for discord.js v13. It has many useful things, that e
 # 📝 Table of contents
 
 -   [Installation](https://www.npmjs.com/package/djs-helper-v13#installation)
--   [Usages](https://www.npmjs.com/package/djs-helper-v13#-usages)
+-   [Usages](https://www.npmjs.com/package/djs-helper-v13#-examples-for-usages)
 -   [Importing](https://www.npmjs.com/package/djs-helper-v13#-importing)
 
 ---
@@ -33,6 +33,7 @@ $ npm install djs-helper-v13
 
 -   [create_button](https://www.npmjs.com/package/djs-helper-v13/#create_button) - Creating MessageButton easily!
 -   [button_pagination](https://www.npmjs.com/package/djs-helper-v13/#button_pagination) - Creating Embed Pagination with Buttons easily!
+-   [create_menu](https://www.npmjs.com/package/djs-helper-v13/#create_menu) - Creating Select Menus easily!
 ## ✈ Importing
 
 ```javascript
@@ -63,6 +64,46 @@ console.log(thing);
 #### Preview on the above button :
 
 ![preview](https://media.discordapp.net/attachments/803265379484565564/864160182644899841/unknown.png)
+
+
+### create_menu
+
+#### Example :
+
+```js
+		  // requring the function from the package!
+		  const { create_menu } = require('djs-helper-v13');
+		  
+		  // our array with the selections we want for the menu!!
+		  
+            let array = [{
+                  label: 'FIRST',
+                  description: 'Hellow World',
+                  value: 'First value'
+            }, {
+                  label: 'Second',
+                  description: 'Heylo World!!',
+                  value: 'Second value'
+            }]; // you can have more than two!
+			
+			
+			// using the package to make it!
+            let menu = create_menu({
+                  id: 'Menus',
+                  placeHolder: 'nothing much',
+                  array
+            });
+	
+
+            return message.channel.send({
+                  content: 'Testing',
+                  components: [menu]
+            }); // sending the menu to the channel! And (message) is the current message!
+```
+
+#### Preview on the above menu :
+
+![preview](https://media.discordapp.net/attachments/803265368235835472/864509355865276458/unknown.png)
 
 
 ### button_pagination
