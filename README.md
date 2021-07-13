@@ -14,14 +14,14 @@ djs-helper-v13 is a helper for discord.js v13. It has many useful things, that e
 # 📝 Table of contents
 
 -   [Installation](https://www.npmjs.com/package/djs-helper-v13#installation)
--   [Usages](https://www.npmjs.com/package/djs-helper-v13#-usages-click-on-it-for-more-info-on-how-to-use-it)
+-   [Usages](https://www.npmjs.com/package/djs-helper-v13#-usages)
 -   [Importing](https://www.npmjs.com/package/djs-helper-v13#-importing)
 
 ---
 
 ## Installation
 
-First install [Node.js](http://nodejs.org/), then:
+First install [Node.js](http://nodejs.org/), then do the following =>
 
 ```sh
 $ npm install djs-helper-v13
@@ -29,7 +29,7 @@ $ npm install djs-helper-v13
 
 ## 🛠 Usages
 
-**Tip**: Click the them to see more information!
+**Tip**: Click them to see more information!
 
 -   [create_button](https://www.npmjs.com/package/djs-helper-v13/#create_button) - Creating MessageButton easily!
 -   [button_pagination](https://www.npmjs.com/package/djs-helper-v13/#button_pagination) - Creating Embed Pagination with Buttons easily!
