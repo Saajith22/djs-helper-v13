@@ -48,6 +48,8 @@ const button_pagination = async (client, message, embeds) => {
         if(interaction.user.id !== message.author.id) return interaction.channel.send({ content: "You can not use the button!", ephermal: true })
 
         if (interaction.customId == `-1${message.author.id}`) {
+			
+			if(!interaction) return;
 
             index = index > 0 ? --index : embeds.length - 1;
 
@@ -56,6 +58,8 @@ const button_pagination = async (client, message, embeds) => {
             });
 
         } else if (interaction.customId == `-2${message.author.id}`) {
+			
+			if(!interaction) return;
 
             index = index + 1 < embeds.length ? ++index : 0;
 
@@ -65,9 +69,11 @@ const button_pagination = async (client, message, embeds) => {
         }
 
         setTimeout(async () => {
+			
+			if(!interaction) return;
 
             button.setDisabled(true)
-            button2.setDisabled(true)
+            button2.setDisabled(true)	
 
             return await interaction.editReply({
                 components: [buttons]
