@@ -1,6 +1,6 @@
 {
   "name": "djs-helper-v13",
-  "version": "1.0.9",
+  "version": "1.0.11",
   "description": "",
   "main": "index.js",
   "preferGlobal": true,
@@ -8,7 +8,6 @@
     "type": "git",
     "url": "https://github.com/Saajith22/djs-helper-v13"
   },
-
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

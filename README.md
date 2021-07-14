@@ -14,7 +14,7 @@ djs-helper-v13 is a helper for discord.js v13. It has many useful things, that e
 # 📝 Table of contents
 
 -   [Installation](https://www.npmjs.com/package/djs-helper-v13#installation)
--   [Usages](https://www.npmjs.com/package/djs-helper-v13#-examples-for-usages)
+-   [Usages](https://www.npmjs.com/package/djs-helper-v13#-usages)
 -   [Importing](https://www.npmjs.com/package/djs-helper-v13#-importing)
 
 ---
@@ -34,6 +34,7 @@ $ npm install djs-helper-v13
 -   [create_button](https://www.npmjs.com/package/djs-helper-v13/#create_button) - Creating MessageButton easily!
 -   [button_pagination](https://www.npmjs.com/package/djs-helper-v13/#button_pagination) - Creating Embed Pagination with Buttons easily!
 -   [create_menu](https://www.npmjs.com/package/djs-helper-v13/#create_menu) - Creating Select Menus easily!
+-   [self_roles](https://www.npmjs.com/package/djs-helper-v13/#self_roles) - Creating Self-Role System with Select Menus easily!
 ## ✈ Importing
 
 ```javascript
@@ -147,6 +148,36 @@ button_pagination(client, message, listOfEmbeds).then(e => null);
 #### Preview on the button pagination :
 
 ![preview](https://i.imgur.com/V25moSd.gif)
+
+### self_roles
+
+#### Example :
+
+```js
+// requring the package function!
+const { self_roles } = require('djs-helper-v13'); 
+
+// The array of roles you want in the self_roles (menu), make sure its below 25!
+
+ const arr = [
+      "Gaming",
+      "Super",
+      "Hero",
+      "Amazing",
+      "Developer"
+]
+
+//Resolving the promise and using the self_roles function to make the self-roles menu!
+await self_roles(client, message, arr);
+
+/*Note*/
+// The self-role menu system, is completely like an addon, its roles does not have colors, or permissions!
+
+```
+
+#### Preview on the self_roles :
+
+![preview](https://i.imgur.com/qjmcbdy.mp4)
 
 
 **Thank you for using the package!**

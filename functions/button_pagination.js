@@ -4,6 +4,7 @@ const {
     Message,
     Interaction
 } = require('discord.js');
+const chalk = require('chalk')
 
 /*BUTTON PAGINATION*/
 
@@ -16,22 +17,19 @@ const {
  */
 
 const button_pagination = async (client, message, embeds) => {
-    let button = new MessageButton()
-        .setCustomId(`-1${message.author.id}`)
-        .setLabel('⏪')
-        .setStyle('SUCCESS');
 
-    let button2 = new MessageButton()
-        .setCustomId(`-2${message.author.id}`)
-        .setLabel('⏩')
-        .setStyle('SUCCESS');
+    if(!client || !message || !embeds) throw new Error(chalk.red.bold('Please provide all the arguments, and make sure they are valid!'))
+
+
+    let index = 0;
+
+    let button = new MessageButton().setCustomId(`-1${message.author.id}`).setLabel('⏪').setStyle('SUCCESS');
+    let button2 = new MessageButton().setCustomId(`-2${message.author.id}`).setLabel('⏩').setStyle('SUCCESS');
 
     let buttons = [
         button,
         button2
     ]
-
-    let index = 0;
 
     let msg = await message.channel.send({
         embeds: [embeds[0]],
@@ -43,21 +41,10 @@ const button_pagination = async (client, message, embeds) => {
      */
     client.on('interactionCreate', async (interaction) => {
         if (!interaction) return;
-        if (!interaction.isButton()) return;
         if (interaction.user.bot) return;
-
-        if (interaction.user.id !== message.author.id) {
-            interaction.reply({
-                content: "You can not use the button!",
-                ephemeral: true
-            });
-            interaction.deferUpdate();
-            return;
-        }
+        if (!interaction.isButton()) return;
 
         if (interaction.customId == `-1${message.author.id}`) {
-
-            if (!interaction) return;
 
             index = index > 0 ? --index : embeds.length - 1;
 
@@ -67,8 +54,6 @@ const button_pagination = async (client, message, embeds) => {
 
         } else if (interaction.customId == `-2${message.author.id}`) {
 
-            if (!interaction) return;
-
             index = index + 1 < embeds.length ? ++index : 0;
 
             await interaction.update({
@@ -77,8 +62,6 @@ const button_pagination = async (client, message, embeds) => {
         }
 
         setTimeout(async () => {
-
-            if (!interaction) return;
 
             button.setDisabled(true)
             button2.setDisabled(true)

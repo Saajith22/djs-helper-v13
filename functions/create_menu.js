@@ -3,25 +3,15 @@ const {
     MessageSelectMenu
 } = require('discord.js');
 
-let red = chalk.red.bold('Error');
-
 /* MENU CREATOR */
 /**
- * @param {Object} options - Options for the select menu (id, placeHolder etc.)
  * @param {String} id - The id for the select menu
  * @param {String}  placeHolder - The place holder for the select menu 
  * @param {Array} array - The array of options (rows to select) for the select menu
  * @returns MessageSelectMenu
  */
 
-const create_menu = (options) => {
-    if (!options) throw new Error(`The options were not provided! ${red}`);
-    let {
-        id,
-        placeHolder,
-        array,
-    } = options;
-
+const create_menu = (id, placeHolder, array) => {
     if (!id || !array) throw new Error(`The options were not provided! Make sure you provide all the options! ${red}`);
     if (array.length < 0) throw new Error(`The array has to have atleast one thing to select! ${red}`);
     let select_menu;
