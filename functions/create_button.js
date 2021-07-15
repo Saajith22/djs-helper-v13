@@ -44,7 +44,7 @@ const create_button = ({
             .setStyle(stole)
     }
 
-    return [button];
+    return button
 }
 
 /* UTILS */
