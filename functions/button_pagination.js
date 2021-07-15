@@ -2,7 +2,8 @@ const {
     MessageButton,
     Client,
     Message,
-    Interaction
+    Interaction,
+    MessageActionRow
 } = require('discord.js');
 const chalk = require('chalk')
 
@@ -18,13 +19,20 @@ const chalk = require('chalk')
 
 const button_pagination = async (client, message, embeds) => {
 
-    if(!client || !message || !embeds) throw new Error(chalk.red.bold('Please provide all the arguments, and make sure they are valid!'))
+    if (!client || !message || !embeds) throw new Error(chalk.red.bold('Please provide all the arguments, and make sure they are valid!'))
 
 
     let index = 0;
 
-    let button = new MessageButton().setCustomId(`-1${message.author.id}`).setLabel('⏪').setStyle('SUCCESS');
-    let button2 = new MessageButton().setCustomId(`-2${message.author.id}`).setLabel('⏩').setStyle('SUCCESS');
+    let button = new MessageActionRow()
+        .addComponents(
+            new MessageButton().setCustomId(`-1${message.author.id}`).setLabel('⏪').setStyle('SUCCESS')
+        );
+
+    let button2 = new MessageActionRow()
+        .addComponents(
+            new MessageButton().setCustomId(`-2${message.author.id}`).setLabel('⏩').setStyle('SUCCESS')
+        );
 
     let buttons = [
         button,
@@ -33,7 +41,7 @@ const button_pagination = async (client, message, embeds) => {
 
     let msg = await message.channel.send({
         embeds: [embeds[0]],
-        components: [buttons]
+        components: buttons
     });
 
     /**

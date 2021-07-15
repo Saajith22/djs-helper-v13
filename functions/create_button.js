@@ -3,7 +3,7 @@ const {
     MessageButton,
     Message,
     Client,
-    MessageEmbed
+    MessageActionRow,
 } = require('discord.js');
 
 /* BUTTON CREATOR */
@@ -21,7 +21,7 @@ const create_button = ({
     label,
     id
 }) => {
-    if (!style || !label) throw new Error(`The options were not provided! ${chalk.red.bold('Error')}`);
+    if (!style || !label) throw new Error(chalk.red.bold('The options were not provided!'));
     if (url && id) return console.error(`Both the url and id can not be specified at the same time! ${chalk.red.bold('Error')}`)
     let button;
 
@@ -33,18 +33,27 @@ const create_button = ({
     if (url) {
         if (!url.startsWith('https') || !url.startsWith('http')) return console.error(`An invalid URL was provided! ${chalk.red.bold('Error')}`);
         if (!stole == "LINK") throw new Error(`The style must be url if you are making a url-redirect button! ${chalk.red.bold('Error')}`)
-        button = new MessageButton()
-            .setLabel(label)
-            .setStyle(stole)
-            .setURL(url)
+
+        button = new MessageActionRow()
+            .addComponents(
+                new MessageButton()
+                .setLabel(label)
+                .setStyle(stole)
+                .setURL(url)
+            )
+
     } else {
-        button = new MessageButton()
-            .setCustomId(id)
-            .setLabel(label)
-            .setStyle(stole)
+
+        button = new MessageActionRow()
+            .addComponents(
+                new MessageButton()
+                .setCustomId(id)
+                .setLabel(label)
+                .setStyle(stole)
+            )
     }
 
-    return button
+    return button;
 }
 
 /* UTILS */

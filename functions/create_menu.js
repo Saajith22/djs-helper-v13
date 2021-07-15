@@ -1,6 +1,7 @@
 const chalk = require('chalk');
 const {
-    MessageSelectMenu
+    MessageSelectMenu,
+    MessageActionRow
 } = require('discord.js');
 
 /* MENU CREATOR */
@@ -28,12 +29,15 @@ const create_menu = ({
         if (!item.value) throw new Error(`The array must have objects, with the following options: (label, description and value) !! ${red}`);
     });
 
-    select_menu = new MessageSelectMenu()
-        .setCustomId(id)
-        .setPlaceholder(placeHolder)
-        .addOptions(array);
+    select_menu = new MessageActionRow()
+        .addComponents(
+            new MessageSelectMenu()
+            .setCustomId(id)
+            .setPlaceholder(placeHolder)
+            .addOptions(array)
+        );
 
-    return [select_menu];
+    return select_menu;
 }
 
 module.exports = create_menu;
