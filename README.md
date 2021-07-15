@@ -58,8 +58,10 @@ const { create_button } = require('djs-helper-v13');
 // creating the button (with options that we want!)
 let thing = create_button({ style: 'green', label: 'CHICKEN', id: 'SED' }); 
 
-//Now we have the button!
-console.log(thing);
+return message.channel.send({
+      content: 'Testing',
+      components: [thing]
+}); // sending the button to the channel! And (message) is the current message!
 ```
 
 #### Preview on the above button :
