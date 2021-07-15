@@ -27,12 +27,11 @@ const create_button = ({
 
     let styles = ["green", "red", "url", "normal", "grey"];
     if (!styles.includes(style.toLowerCase())) throw new Error(`Invalid style was provided! Please use one of: (green, red, url, normal or grey)! ${chalk.red.bold('Error')}`);
-
     if (style.toLowerCase() == 'url' && !url) throw new Error(`An url must be provided if the style is set to url! ${chalk.red.bold('Error')}`)
-    if (!url.startsWith('https') || !url.startsWith('http')) return console.error(`An invalid URL was provided! ${chalk.red.bold('Error')}`);
     let stole = styleChanger(style.toLowerCase());
 
     if (url) {
+        if (!url.startsWith('https') || !url.startsWith('http')) return console.error(`An invalid URL was provided! ${chalk.red.bold('Error')}`);
         if (!stole == "LINK") throw new Error(`The style must be url if you are making a url-redirect button! ${chalk.red.bold('Error')}`)
         button = new MessageButton()
             .setLabel(label)
