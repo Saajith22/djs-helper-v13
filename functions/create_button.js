@@ -15,7 +15,12 @@ const {
  * @returns MessageButton
  */
 
-const create_button = (style, url, label, id) => {
+const create_button = ({
+    style,
+    url,
+    label,
+    id
+}) => {
     if (!style || !label) throw new Error(`The options were not provided! ${chalk.red.bold('Error')}`);
     if (url && id) return console.error(`Both the url and id can not be specified at the same time! ${chalk.red.bold('Error')}`)
     let button;
