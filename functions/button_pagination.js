@@ -71,8 +71,9 @@ const button_pagination = async (client, message, embeds) => {
 
         setTimeout(async () => {
 
-            button.setDisabled(true)
-            button2.setDisabled(true)
+
+            button.components[0].setDisabled(true)
+            button2.components[0].setDisabled(true)
 
             return await interaction.editReply({
                 components: [buttons]
