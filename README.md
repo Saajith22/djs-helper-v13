@@ -139,9 +139,9 @@ const listOfEmbeds = [
 ]
 
 // Using the pagination, by handling its promise!
-// Passing, the Client, Message and the array of embeds =>
+// Passing, the Message and the array of embeds =>
 
-button_pagination(client, message, listOfEmbeds).then(e => null);
+button_pagination(message, listOfEmbeds).then(e => null);
 
 // Now you have the button pagination
 
@@ -170,7 +170,7 @@ const { self_roles } = require('djs-helper-v13');
 ]
 
 //Resolving the promise and using the self_roles function to make the self-roles menu!
-await self_roles(client, message, arr);
+await self_roles(message, arr);
 
 /*Note*/
 // The self-role menu system, is completely like an addon, its roles does not have colors, or permissions!

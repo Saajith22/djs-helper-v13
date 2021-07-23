@@ -17,16 +17,18 @@ const create_menu = ({
     placeHolder,
     array
 }) => {
-    if (!id || !array) throw new Error(`The options were not provided! Make sure you provide all the options! ${red}`);
-    if (array.length < 0) throw new Error(`The array has to have atleast one thing to select! ${red}`);
+
+    if (!id || !array) throw new Error(chalk.red.bold('The options were not provided! Make sure you provide all the options!'));
+    if(typeof roles != 'object') throw new Error(chalk.red.bold('Please provide the roles as an array!'));
+    if (array.length < 0) throw new Error(chalk.red.bold(`The array has to have atleast one thing to select!`));
     let select_menu;
 
     placeHolder = placeHolder ? placeHolder : 'Nothing Selected';
 
     array.forEach(item => {
-        if (!item.label) throw new Error(`The array must have objects, with the following options: (label, description and value) !! ${red}`);
-        if (!item.description) throw new Error(`The array must have objects, with the following options: (label, description and value) !! ${red}`);
-        if (!item.value) throw new Error(`The array must have objects, with the following options: (label, description and value) !! ${red}`);
+        if (!item.label) throw new Error(chalk.red.bold(`The array must have objects, with the following options: (label, description and value) !!`));
+        if (!item.description) throw new Error(chalk.red.bold(`The array must have objects, with the following options: (label, description and value) !!`));
+        if (!item.value) throw new Error(chalk.red.bold(`The array must have objects, with the following options: (label, description and value) !!`));
     });
 
     select_menu = new MessageActionRow()

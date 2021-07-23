@@ -1,9 +1,8 @@
 const {
-    MessageButton,
-    Client,
-    Message,
-    Interaction,
-    MessageActionRow
+  MessageButton,
+  Message,
+  Interaction,
+  MessageActionRow
 } = require('discord.js');
 const chalk = require('chalk')
 
@@ -11,78 +10,87 @@ const chalk = require('chalk')
 
 /**
  * 
- * @param {Client} client - Your Client
  * @param {Message} message  - The message
  * @param {Array} embeds  - Array of embeds
  * @returns Button Pagination
  */
 
-const button_pagination = async (client, message, embeds) => {
+const button_pagination = async (message, embeds) => {
 
-    if (!client || !message || !embeds) throw new Error(chalk.red.bold('Please provide all the arguments, and make sure they are valid!'))
+  if (!message || !embeds) throw new Error(chalk.red.bold('Please provide all the arguments, and make sure they are valid!'))
 
 
-    let index = 0;
+  let index = 0;
 
-    let button = new MessageActionRow()
-        .addComponents(
-            new MessageButton().setCustomId(`-1${message.author.id}`).setLabel('⏪').setStyle('SUCCESS')
-        );
+  let button = new MessageActionRow()
+    .addComponents(
+      new MessageButton().setCustomId(`-1`).setLabel('⏪').setStyle('SUCCESS'),
+      new MessageButton().setCustomId(`-2`).setLabel('⏩').setStyle('SUCCESS')
+    );
 
-    let button2 = new MessageActionRow()
-        .addComponents(
-            new MessageButton().setCustomId(`-2${message.author.id}`).setLabel('⏩').setStyle('SUCCESS')
-        );
+  let buttons = [
+    button
+  ]
 
-    let buttons = [
-        button,
-        button2
-    ]
+  let msg = await message.channel.send({
+    embeds: [embeds[0]],
+    components: buttons
+  }).then((message) => {
 
-    let msg = await message.channel.send({
-        embeds: [embeds[0]],
-        components: buttons
+    const buttonIDS = [`-1`, `-2`];
+
+    const buttons = async (interaction) => {
+      if (!buttonIDS.includes(interaction.customId)) return;
+
+      if (interaction.customId == `-1`) {
+
+        index = index > 0 ? --index : embeds.length - 1;
+
+        await interaction.deferUpdate();
+
+        await interaction.message.edit({
+          embeds: [embeds[index]]
+        });
+
+      } else if (interaction.customId == `-2`) {
+
+
+        index = index + 1 < embeds.length ? ++index : 0;
+
+        await interaction.deferUpdate();
+
+        await interaction.message.edit({
+          embeds: [embeds[index]]
+        });
+      }
+    };
+
+    const filter = (interaction) => {
+      return !interaction.user.bot
+    };
+
+    const collector = message.createMessageComponentCollector({
+      filter,
+      componentType: "BUTTON",
+      time: 15000
     });
+    
+    collector.on("collect", buttons);
+    collector.on("end", () => {
+      button.components[0].setDisabled(true)
+      button.components[1].setDisabled(true)
 
-    /**
-     * @param {Interaction} interaction
-     */
-    client.on('interactionCreate', async (interaction) => {
-        if (!interaction) return;
-        if (interaction.user.bot) return;
-        if (!interaction.isButton()) return;
+      message.edit({
+        embeds: [embeds[0]],
+        components: [button]
+      })
+    });
+  });
 
-        if (interaction.customId == `-1${message.author.id}`) {
-
-            index = index > 0 ? --index : embeds.length - 1;
-
-            await interaction.update({
-                embeds: [embeds[index]]
-            });
-
-        } else if (interaction.customId == `-2${message.author.id}`) {
-
-            index = index + 1 < embeds.length ? ++index : 0;
-
-            await interaction.update({
-                embeds: [embeds[index]]
-            });
-        }
-
-        setTimeout(async () => {
-
-
-            button.components[0].setDisabled(true)
-            button2.components[0].setDisabled(true)
-
-            return await interaction.editReply({
-                components: [buttons]
-            });
-        }, 15000)
-    })
-
-    return msg;
+  return msg;
 
 }
 
-module.exports = button_pagination;
+module.exports = {
+  button_pagination
+};
