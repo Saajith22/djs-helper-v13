@@ -12,7 +12,7 @@ const chalk = require('chalk')
 
 const self_roles = async (message, roles) => {
   if (!roles || !message) throw new Error(`${chalk.red.bold('Please provide the required arguments!')}`);
-  if(typeof roles != 'object') throw new Error(chalk.red.bold('Please provide the roles as an array!'));
+  //if(typeof roles != 'object') throw new Error(chalk.red.bold('Please provide the roles as an array!'));
   if (roles.length > 25) throw new Error(chalk.red.bold('The amount of selections for the menu should be lesser than or equal to 25!'))
 
   let arr = [];

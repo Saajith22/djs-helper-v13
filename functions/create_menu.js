@@ -19,7 +19,7 @@ const create_menu = ({
 }) => {
 
     if (!id || !array) throw new Error(chalk.red.bold('The options were not provided! Make sure you provide all the options!'));
-    if(typeof roles != 'object') throw new Error(chalk.red.bold('Please provide the roles as an array!'));
+    //if(typeof roles != 'object') throw new Error(chalk.red.bold('Please provide the roles as an array!'));
     if (array.length < 0) throw new Error(chalk.red.bold(`The array has to have atleast one thing to select!`));
     let select_menu;
 

@@ -142,6 +142,7 @@ const listOfEmbeds = [
 // Passing, the Message and the array of embeds =>
 
 button_pagination(message, listOfEmbeds).then(e => null);
+//using `.then()` to resolve promise xD
 
 // Now you have the button pagination
 

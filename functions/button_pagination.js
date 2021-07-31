@@ -91,6 +91,4 @@ const button_pagination = async (message, embeds) => {
 
 }
 
-module.exports = {
-  button_pagination
-};
+module.exports = button_pagination
