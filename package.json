@@ -18,8 +18,11 @@
     "v13"
   ],
   "license": "ISC",
+  "devDependencies": {
+    "node": "^14.17.4"
+  },
   "dependencies": {
     "chalk": "^4.1.1",
-    "discord.js": "^13.0.0-dev.4206e35.1626350625"
+    "discord.js": "^13.0.0-dev.t1627992462.35fa3b3"
   }
 }
